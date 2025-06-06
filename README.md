@@ -129,11 +129,12 @@ Feel free to use, modify, and share with proper attribution.
 ## ✍️ Author
 
 **Bala Subramani**  
-📧 balasubramani@example.com  
-🔗 [GitHub](https://github.com/bbalasubramani) | [LinkedIn](https://linkedin.com/in/YOURPROFILE)
+📧 bala026b@gmail.com  
+🔗 [GitHub](https://github.com/bbalasubramani) | [LinkedIn](https://linkedin.com/in/balasubramani-dev)
 
 ---
 
-## 📷 Screenshots (Optional)
+## 📷 Screenshots
 
-*Add if you have visuals of the model in action, web app interface, or graphs*
+![Dashboard Screenshot](images/news1.jpg)
+![Dashboard Screenshot](images/news2.jpg)
