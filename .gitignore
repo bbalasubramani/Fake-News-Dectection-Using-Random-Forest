@@ -1,0 +1,45 @@
+# 🐍 Python Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 🔒 Virtual Environments
+venv/
+env/
+myvenv/
+ENV/
+.venv/
+
+# ⚙️ Environment Variables
+.env
+.env.*
+
+# 🔧 IDE/Editor Configs
+.vscode/
+.idea/
+
+# 📦 Packaging
+*.egg-info/
+*.egg
+dist/
+build/
+
+# 🧪 Test Caches
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# 🗃 OS Files
+.DS_Store
+Thumbs.db
+
+# 📄 Logs & Backups
+*.log
+*.bak
+*.swp
+
+# 📦 Node (optional)
+node_modules/

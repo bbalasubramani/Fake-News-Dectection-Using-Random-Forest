@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fake News Detection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-color: #f2f1df;
+      --primary-color: #c95831;  /* warm burnt orange */
+      --accent-color: #a14626;  /* darker burnt orange accent */
+      --button-hover-color: #8a3f21;
+
+      --text-color: var(--primary-color);
+      --shadow-color: rgba(201, 88, 49, 0.15);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      max-width: 580px;
+      width: 100%;
+      border-radius: 24px;
+      padding: 48px 60px 64px 60px;
+      box-shadow:
+        0 14px 34px var(--shadow-color),
+        0 28px 56px rgba(201, 88, 49, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    /* Soft layered blurred background shapes for uniqueness */
+    .container::before,
+    .container::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.1;
+      z-index: 0;
+    }
+    .container::before {
+      width: 240px;
+      height: 240px;
+      background: var(--primary-color);
+      top: -100px;
+      right: -110px;
+      transform: rotate(45deg);
+      opacity: 0.07;
+    }
+    .container::after {
+      width: 180px;
+      height: 180px;
+      background: var(--accent-color);
+      bottom: -70px;
+      left: -60px;
+      transform: rotate(-30deg);
+      opacity: 0.07;
+    }
+
+    .container:hover {
+      box-shadow:
+        0 18px 46px rgba(201, 88, 49, 0.25),
+        0 36px 72px rgba(201, 88, 49, 0.15);
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 20px; /* Reduced margin */
+      text-align: center;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 1px 1px 2px rgba(201, 88, 49, 0.2);
+    }
+
+    .news-image {
+      width: 100%;
+      max-width: 100%; /* Ensure it doesn't exceed container */
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .top-left-image {
+      position: absolute;
+      top: 20px; /* Adjust as needed */
+      left: 20px; /* Adjust as needed */
+      width: 100px; /* Adjust size as needed */
+      height: auto; /* Maintain aspect ratio */
+      z-index: 2; /* Ensure it appears above other elements */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 160px;
+      padding: 22px 28px;
+      font-size: 1.2rem;
+      border: 2.5px solid var(--accent-color);
+      border-radius: 20px;
+      font-family: inherit;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      color: var(--primary-color);
+      box-shadow: inset 0 0 10px rgba(201, 88, 49, 0.05);
+      background: #fafafa;
+    }
+
+    textarea::placeholder {
+      color: #be7b62;
+      font-style: italic;
+    }
+
+    textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 15px var(--primary-color);
+      outline: none;
+      background: #fff;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 22px 0;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: white;
+      border: none;
+      border-radius: 26px;
+      cursor: pointer;
+      background: var(--primary-color);
+      box-shadow:
+        0 8px 22px rgba(201, 88, 49, 0.5);
+      letter-spacing: 1.3px;
+      transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    button::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -80%;
+      width: 50%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.35);
+      transform: skewX(-25deg);
+      transition: left 0.55s ease;
+      z-index: -1;
+    }
+
+    button:hover::before {
+      left: 150%;
+    }
+
+    button:hover {
+      background: var(--button-hover-color);
+      box-shadow:
+        0 10px 28px rgba(201, 88, 49, 0.7);
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-top: 44px;
+      font-weight: 700;
+      font-size: 1.85rem;
+      text-align: center;
+      color: var(--primary-color);
+      letter-spacing: 1.3px;
+      user-select: none;
+      text-shadow: 1px 1px 4px rgba(201, 88, 49, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 36px 28px 48px 28px;
+        max-width: 95vw;
+      }
+      h1 {
+        font-size: 2.4rem;
+        letter-spacing: 1.5px;
+      }
+      textarea {
+        min-height: 130px;
+        font-size: 1.1rem;
+      }
+      button {
+        font-size: 1.2rem;
+        padding: 18px 0;
+      }
+      h2 {
+        font-size: 1.55rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Add the image in the top left corner -->
+    <img src="static/images/news.png" alt="News Icon" class="top-left-image" />
+    
+    <h1>Fake News Detection</h1>
+    
+    <form action="/predict" method="post" novalidate>
+      <textarea name="text" placeholder="Enter news article here..." required aria-label="News article input"></textarea>
+      <button type="submit" aria-label="Check news article">Check</button>
+    </form>
+    {% if prediction %}
+      <h2>Prediction: {{ prediction }}</h2>
+    {% endif %}
+  </div>
+</body>
+</html>
